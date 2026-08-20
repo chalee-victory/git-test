@@ -39,12 +39,50 @@ def show_menu():
     print("0. 종료")
     print("선택 :")
 
+def add_prompt(prompts):
+    print("\n=== 프롬프트 추가 ===")
+
+    # 1. 제목 입력받기 (빈칸이면 재입력 요청)
+    title = input("제목(Enter=>종료): ")
+    if title == "":
+        print("\n제목이 비어있어 프롬프트 추가를 취소했습니다.")
+        return
+
+    # 2. 내용 입력받기 (빈칸이면 재입력 요청)
+    content = input("내용: ")
+    while content == "":
+        print("내용은 비워둘 수 없습니다. 다시 입력해주세요.")
+        content = input("내용: ")
+
+    # 3. 카테고리 입력받기 (빈칸이면 재입력 요청)
+    category = input("카테고리: ")
+    while category == "":
+        print("카테고리는 비워둘 수 없습니다. 다시 입력해주세요.")
+        category = input("카테고리: ")
+
+    # 4. 입력여부 확인하기(Y/N)
+    chk = input("입력하시겟어요?(Y/N): ")
+    if chk == 'N':
+        print("\n프롬프트 추가를 취소했습니다.")
+        return
+
+    # 5. 새 딕셔너리 만들어서 prompts 리스트에 추가
+    new_prompt = {
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    }
+    prompts.append(new_prompt)
+
+    print("\n프롬프트가 추가되었습니다!")
+
 while True:
     show_menu()
     choice = input()
 
     if choice == "1":
-        print("111추후 구현 예정")
+        add_prompt(prompts)
     elif choice == "2":
         print("222추후 구현 예정")
     elif choice == "3":
@@ -60,4 +98,7 @@ while True:
     elif choice == "0":
         print("프로그램을 종료합니다.")
         break
-    else:0
+    else:
+        print("\n 잘못된 번호입니다. 다시 선택해 주세요.")
+
+    
