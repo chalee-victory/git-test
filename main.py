@@ -4,19 +4,19 @@ prompts = [
         "title": "에러 메시지 보는 지친 개발자",
         "content": "어두운 방 안, 늦은 밤 한 지친 한국인 개발자가 붉은 에러 메시지로 가득한 모니터를 바라보고 있는 모습, 드라마틱한 조명, 시네마틱, 포토리얼리스틱, 8K 해상도 --ar 16:9 --style raw",
         "category": "이미지 생성",
-        "favorite": False
+        "favorite": True
     },
     {
         "title": "감정형 불만 및 긴급 민원 테스트",
         "content": "민원인 정보: 김철수 / 50대 / 이사 당일 공과금 분쟁\n문의 사항: 오늘 서초구로 이사 왔는데, 이전 집주인이 수도요금을 안 내서 수도를 끊겠다고 합니다! 당장 오늘 저녁에 물을 써야 하는데 구청에서 당장 해결해 주세요!",
         "category": "자동화",
-        "favorite": False
+        "favorite": True
     },
     {
         "title": "정보 모호성 및 조건 복합 민원 테스트",
         "content": "민원인 정보: 박민지 / 40대 / 강남구에서 서초구로 이사 예정 (초등학생 4학년 자녀 동반)\n문의 사항: 이번에 이사 가는데 구청에 제출해야 할 서류랑 지원받을 수 있는 혜택 전부 알려주세요.",
         "category": "사무자동화",
-        "favorite": False
+        "favorite": True
     },
 
     {
@@ -145,6 +145,19 @@ def show_detail(prompts):
     print(prompt["content"])
     print("─" * 30)
 
+def toggle_favorite(prompts):
+    print("\n=== 즐겨찾기 관리 ===")
+    number = input("프롬프트 번호 입력: ")
+    index = int(number) - 1
+    prompt = prompts[index]
+    
+    prompt["favorite"] = not prompt["favorite"]
+    
+    if prompt["favorite"]:
+        print(f"\n'{prompt['title']}' 프롬프트를 즐겨찾기에 추가했습니다!")
+    else:
+        print(f"\n'{prompt['title']}' 프롬프트를 즐겨찾기에서 해제했습니다.")
+
 while True:
     show_menu()
     choice = input()
@@ -160,7 +173,7 @@ while True:
     elif choice == "5":
         show_detail(prompts)
     elif choice == "6":
-        print("추후 구현 예정")
+        toggle_favorite(prompts)
     elif choice == "7":
         print("777추후 구현 예정")
     elif choice == "0":
