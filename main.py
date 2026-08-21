@@ -158,6 +158,20 @@ def toggle_favorite(prompts):
     else:
         print(f"\n'{prompt['title']}' 프롬프트를 즐겨찾기에서 해제했습니다.")
 
+def show_favorites(prompts):
+    print("\n=== 즐겨찾기 목록 ===")
+    
+    count = 0
+    for i, prompt in enumerate(prompts, start=1):
+        if prompt["favorite"]:
+            print(f"{i}. [{prompt['category']}] {prompt['title']} ⭐")
+            count += 1
+    
+    if count == 0:
+        print("즐겨찾기한 프롬프트가 없습니다.")
+    else:
+        print(f"\n총 {count}개의 즐겨찾기")
+
 while True:
     show_menu()
     choice = input()
@@ -175,7 +189,7 @@ while True:
     elif choice == "6":
         toggle_favorite(prompts)
     elif choice == "7":
-        print("777추후 구현 예정")
+        show_favorites(prompts)
     elif choice == "0":
         print("프로그램을 종료합니다.")
         break
