@@ -96,8 +96,13 @@ def show_by_category(prompts):
     for i, cat in enumerate(categories, start=1):
         print(f"{i}) {cat}")
     choice = input("선택: ")
-    selected = categories[int(choice) - 1]
-
+    
+    try:
+        selected = categories[int(choice) - 1]
+    except:
+        print("잘못된 번호입니다.")
+        return
+    
     count = 0
     for i, prompt in enumerate(prompts, start=1):
         if prompt["category"] == selected:
@@ -108,7 +113,6 @@ def show_by_category(prompts):
         print("해당 프롬프트가 없습니다")
     else: 
         print(f"총{count}개의 프롬프트")
-
 
 def search_prompt(prompts):
     print("\n=== 프롬프트 검색 ===")
@@ -131,11 +135,16 @@ def search_prompt(prompts):
 def show_detail(prompts):
     print("\n=== 프롬프트 상세 보기 ===")
     number = input("번호 입력: ")
-    index = int(number) - 1
-    prompt = prompts[index]
     
+    try:
+        index = int(number) - 1
+        prompt = prompts[index]
+    except:
+        print("잘못된 번호입니다.")
+        return
+    
+    # 여기서부터는 정상적으로 prompt를 찾은 경우에만 실행됨
     star = "⭐" if prompt["favorite"] else ""
-    
     print("─" * 30)
     print(f"제목: {prompt['title']}")
     print(f"카테고리: {prompt['category']}")
@@ -148,8 +157,13 @@ def show_detail(prompts):
 def toggle_favorite(prompts):
     print("\n=== 즐겨찾기 관리 ===")
     number = input("프롬프트 번호 입력: ")
-    index = int(number) - 1
-    prompt = prompts[index]
+    
+    try:
+        index = int(number) - 1
+        prompt = prompts[index]
+    except:
+        print("잘못된 번호입니다.")
+        return
     
     prompt["favorite"] = not prompt["favorite"]
     
