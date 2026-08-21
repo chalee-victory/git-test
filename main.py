@@ -64,7 +64,8 @@ def add_prompt(prompts):
 
     # 4. 입력여부 확인하기(Y/N)
     chk = input("입력하시겟어요?(Y/N): ")
-    if chk == 'N':
+
+    if chk != 'Y':
         print("\n프롬프트 추가를 취소했습니다.")
         return
 
