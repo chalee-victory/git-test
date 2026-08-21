@@ -128,6 +128,23 @@ def search_prompt(prompts):
     else:
         print(f"\n{count}개의 프롬프트를 찾았습니다.")
 
+def show_detail(prompts):
+    print("\n=== 프롬프트 상세 보기 ===")
+    number = input("번호 입력: ")
+    index = int(number) - 1
+    prompt = prompts[index]
+    
+    star = "⭐" if prompt["favorite"] else ""
+    
+    print("─" * 30)
+    print(f"제목: {prompt['title']}")
+    print(f"카테고리: {prompt['category']}")
+    print(f"즐겨찾기: {star}")
+    print("─" * 30)
+    print("내용:")
+    print(prompt["content"])
+    print("─" * 30)
+
 while True:
     show_menu()
     choice = input()
@@ -141,7 +158,7 @@ while True:
     elif choice == "4":
         search_prompt(prompts)
     elif choice == "5":
-        print("555추후 구현 예정")
+        show_detail(prompts)
     elif choice == "6":
         print("추후 구현 예정")
     elif choice == "7":
