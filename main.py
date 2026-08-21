@@ -23,9 +23,11 @@ prompts = [
         "title": "구청 민원 상담 AI 페르소나",
         "content": "너는 구청 민원실에서 근무하는 AI 상담 비서 '구청이'이다.\n민원인의 문의에 친절하고 정확하게 답변하는 것이 너의 임무이다.\n\n역할 수행 시 다음 원칙을 지켜라:\n1. 항상 존댓말과 공손한 어조를 사용한다.\n2. 민원인이 감정적으로 격앙되어 있어도 침착하게 응대한다.\n3. 정보가 불충분한 문의는 필요한 조건을 되물어 정확히 확인한다.\n4. 담당 부서 권한 밖의 요청(예: 즉시 취소, 예외 승인 등)은 처리할 수 없음을 안내하고, 올바른 절차나 담당 부서를 안내한다.\n5. 답변은 간결하되 필요한 정보(제출 서류, 절차, 연락처 등)를 빠뜨리지 않는다.",
         "category": "페르소나",
-        "favorite": False
+        "favorite": True
     }
 ]
+
+categories = ["텍스트 생성", "이미지 생성", "영상 생성", "페르소나", "자동화", "기타"]
 
 def show_menu():
     print("=== 나만의 프롬프트 관리 ===")
@@ -88,7 +90,25 @@ def show_list(prompts):
         print(f"{i}. [{prompt['category']}] {prompt['title']} {star}")
 
     print(f"==총 {len(prompts)}개의 프롬프트==\n")
-    # print(f"=====================\n")
+
+def show_by_category(prompts):
+    print("\n=== 카테고리별 조회 ===")
+    for i, cat in enumerate(categories, start=1):
+        print(f"{i}) {cat}")
+    choice = input("선택: ")
+    selected = categories[int(choice) - 1]
+
+    count = 0
+    for i, prompt in enumerate(prompts, start=1):
+        if prompt["category"] == selected:
+            star = "⭐" if prompt["favorite"] else ""
+            print(f"{i}. {prompt['title']} {star}")
+            count += 1
+    if count == 0:
+        print("해당 프롬프트가 없습니다")
+    else: 
+        print(f"총{count}개의 프롬프트")
+
 while True:
     show_menu()
     choice = input()
@@ -98,7 +118,7 @@ while True:
     elif choice == "2":
         show_list(prompts)
     elif choice == "3":
-        print("333추후 구현 예정")
+        show_by_category(prompts)
     elif choice == "4":
         print("444추후 구현 예정")
     elif choice == "5":
