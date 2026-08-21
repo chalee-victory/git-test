@@ -1,3 +1,5 @@
+import json
+
 prompts = [
 
     {
@@ -26,6 +28,12 @@ prompts = [
         "favorite": True
     }
 ]
+
+try:
+    with open("prompts.json", "r", encoding="utf-8") as f:
+        prompts = json.load(f)
+except FileNotFoundError:
+    pass
 
 categories = ["텍스트 생성", "이미지 생성", "영상 생성", "페르소나", "자동화", "기타"]
 
@@ -206,6 +214,8 @@ while True:
     elif choice == "7":
         show_favorites(prompts)
     elif choice == "0":
+        with open("prompts.json", "w", encoding="utf-8") as f:
+            json.dump(prompts, f, ensure_ascii=False, indent=2)
         print("프로그램을 종료합니다.")
         break
     else:
